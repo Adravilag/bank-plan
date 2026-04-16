@@ -1,0 +1,458 @@
+$primary: #002e5a;
+$primary-container: #004481;
+$surface: #f9f9f9;
+$surface-container: #e2e2e2;
+$on-surface: #1a1c1c;
+$on-surface-variant: #424750;
+$outline: #737781;
+$outline-variant: #c2c6d2;
+
+.login-page {
+  display: flex;
+  min-height: 100vh;
+  background: $surface;
+  position: relative;
+}
+
+// ── Brand Panel ──
+.brand-panel {
+  display: none;
+  position: relative;
+  width: 50%;
+  min-height: 100vh;
+  background: linear-gradient(135deg, $primary 0%, $primary-container 100%);
+  overflow: hidden;
+
+  @media (min-width: 1024px) {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.brand-bg {
+  position: absolute;
+  inset: 0;
+  opacity: 0.08;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 20px,
+    rgba(255, 255, 255, 0.03) 20px,
+    rgba(255, 255, 255, 0.03) 40px
+  );
+}
+
+.brand-content {
+  position: relative;
+  z-index: 1;
+  padding: 96px;
+
+  .brand-logo {
+    font-size: 24px;
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    color: #fff;
+    text-transform: uppercase;
+    margin-bottom: 48px;
+  }
+
+  .brand-headline {
+    font-size: 56px;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.1;
+    letter-spacing: -1.5px;
+    margin: 0 0 24px;
+  }
+
+  .brand-description {
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.7;
+    max-width: 480px;
+    font-weight: 300;
+  }
+}
+
+.brand-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  margin-top: 64px;
+
+  .stat-value {
+    display: block;
+    font-size: 28px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.5px;
+  }
+
+  .stat-label {
+    display: block;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: 500;
+    margin-top: 4px;
+  }
+}
+
+// ── Login Panel ──
+.login-panel {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+
+  @media (min-width: 1024px) {
+    width: 50%;
+    padding: 48px 64px;
+  }
+}
+
+.login-form-wrapper {
+  width: 100%;
+  max-width: 380px;
+}
+
+.mobile-logo {
+  display: block;
+  text-align: center;
+  font-size: 22px;
+  font-weight: 900;
+  color: $primary;
+  letter-spacing: -0.5px;
+  margin-bottom: 40px;
+
+  @media (min-width: 1024px) {
+    display: none;
+  }
+}
+
+.login-header {
+  margin-bottom: 40px;
+
+  h2 {
+    font-size: 30px;
+    font-weight: 700;
+    color: $on-surface;
+    margin: 0 0 8px;
+    letter-spacing: -0.5px;
+  }
+
+  p {
+    color: $on-surface-variant;
+    font-size: 15px;
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  @media (min-width: 1024px) {
+    text-align: left;
+  }
+}
+
+// ── Form ──
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.field {
+  label {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: $on-surface-variant;
+    margin-bottom: 8px;
+    padding-left: 4px;
+  }
+}
+
+.field-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+
+  label {
+    margin-bottom: 0;
+  }
+}
+
+.forgot-link {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: $primary;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  .input-icon {
+    position: absolute;
+    left: 16px;
+    font-size: 16px;
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
+  input {
+    width: 100%;
+    padding: 16px 16px 16px 48px;
+    background: $surface-container;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 500;
+    color: $on-surface;
+    transition: all 0.3s;
+    outline: none;
+
+    &::placeholder {
+      color: $outline;
+    }
+
+    &:focus {
+      background: $primary-container;
+      color: #fff;
+
+      &::placeholder {
+        color: rgba(255, 255, 255, 0.5);
+      }
+    }
+  }
+}
+
+.toggle-password {
+  position: absolute;
+  right: 16px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 0;
+  opacity: 0.5;
+  transition: opacity 0.2s;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+// ── MFA ──
+.mfa-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  background: #f3f3f3;
+  border-radius: 8px;
+  border: 1px solid rgba($outline-variant, 0.15);
+
+  .mfa-icon {
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+
+  .mfa-text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .mfa-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: $on-surface;
+  }
+
+  .mfa-sub {
+    font-size: 12px;
+    color: $on-surface-variant;
+  }
+}
+
+.toggle-track {
+  width: 40px;
+  height: 22px;
+  border-radius: 11px;
+  background: $outline-variant;
+  position: relative;
+  transition: background 0.2s;
+
+  &.active {
+    background: $primary-container;
+
+    .toggle-thumb {
+      left: auto;
+      right: 3px;
+    }
+  }
+
+  .toggle-thumb {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #fff;
+    transition: all 0.2s;
+  }
+}
+
+// ── Error ──
+.error-message {
+  background: #fef2f2;
+  color: #b91c1c;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  border: 1px solid #fecaca;
+}
+
+// ── Submit Button ──
+.submit-btn {
+  width: 100%;
+  padding: 18px 24px;
+  background: linear-gradient(135deg, $primary 0%, $primary-container 100%);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  box-shadow: 0 8px 24px rgba($primary, 0.2);
+  transition: all 0.3s;
+  margin-top: 8px;
+
+  &:hover:not(:disabled) {
+    transform: scale(1.02);
+    box-shadow: 0 12px 32px rgba($primary, 0.3);
+  }
+
+  &:active:not(:disabled) {
+    transform: scale(0.98);
+  }
+
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+
+  .arrow {
+    font-size: 18px;
+  }
+}
+
+// ── Register ──
+.register-section {
+  margin-top: 40px;
+  padding-top: 32px;
+  border-top: 1px solid rgba($outline-variant, 0.15);
+
+  p {
+    font-size: 14px;
+    color: $on-surface-variant;
+    margin: 0 0 12px;
+  }
+
+  a {
+    font-size: 13px;
+    font-weight: 700;
+    color: $primary;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-decoration: none;
+    transition: opacity 0.2s;
+
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+}
+
+// ── Footer ──
+.login-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 32px;
+  background: #fff;
+  flex-wrap: wrap;
+  gap: 12px;
+
+  @media (max-width: 768px) {
+    position: relative;
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+.footer-badges {
+  display: flex;
+  gap: 24px;
+
+  span {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: $outline;
+    opacity: 0.5;
+  }
+}
+
+.footer-links {
+  display: flex;
+  gap: 32px;
+
+  a {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: $on-surface-variant;
+    text-decoration: none;
+    transition: color 0.2s;
+
+    &:hover {
+      color: $primary;
+    }
+  }
+}
+
+.footer-copy {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: $outline;
+}

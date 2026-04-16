@@ -1,0 +1,107 @@
+$primary: #002e5a;
+$primary-container: #004481;
+$slate-400: #94a3b8;
+$slate-500: #64748b;
+
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+:host ::ng-deep {
+  .modebar {
+    top: 4px !important;
+    right: 8px !important;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+
+    .modebar-btn {
+      font-size: 14px !important;
+      path { fill: $slate-400 !important; }
+      &:hover path { fill: $primary !important; }
+      &.active path { fill: $primary-container !important; }
+    }
+  }
+
+  .card:hover .modebar {
+    opacity: 1;
+  }
+}
+
+.card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 24px 28px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  opacity: 0;
+  transform: translateY(24px);
+  animation: fadeSlideUp 0.6s ease-out 0.5s forwards;
+  transition: box-shadow 0.25s ease;
+
+  &:hover {
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+  }
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.card-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #1e3a5f;
+  margin: 0;
+  letter-spacing: -0.3px;
+}
+
+.card-subtitle {
+  font-size: 11px;
+  color: $slate-400;
+  margin: 4px 0 0;
+}
+
+.toggle-group {
+  display: flex;
+  gap: 4px;
+  background: #f1f5f9;
+  border-radius: 6px;
+  padding: 3px;
+}
+
+.toggle-btn {
+  padding: 5px 14px;
+  border: none;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 500;
+  color: $slate-500;
+  background: transparent;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &:hover:not(.active) {
+    color: $primary;
+    background: rgba(0, 68, 129, 0.04);
+  }
+
+  &.active {
+    background: #fff;
+    color: $primary;
+    font-weight: 600;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+    transform: scale(1.02);
+  }
+}
+
+.chart-area {
+  width: 100%;
+}
+
+.chart-tall {
+  height: 300px;
+}

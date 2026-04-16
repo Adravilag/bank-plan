@@ -1,0 +1,42 @@
+<div class="card">
+  <div class="card-header-inline">
+    <h3 class="card-title">Expense Distribution</h3>
+    @if (activeFilter()) {
+      <button class="filter-badge" (click)="resetFilter()">
+        <span class="material-symbols-outlined" style="font-size: 14px">close</span>
+        Filtro: {{ activeFilter() }}
+      </button>
+    }
+  </div>
+  <div class="donut-layout">
+    <div class="donut-chart-wrapper">
+      <div id="chart-expense" class="chart-donut"></div>
+      <div class="donut-center" [class.donut-center-active]="activeExpenseItem()">
+        @if (activeExpenseItem(); as item) {
+          <span class="donut-pct" [style.color]="item.color">{{ item.pct }}</span>
+          <span class="donut-name">{{ item.label }}</span>
+          <span class="donut-count">{{ item.value }} txns</span>
+        } @else {
+          <span class="donut-pct">{{ totalTransactions() }}</span>
+          <span class="donut-name">Transacciones</span>
+        }
+      </div>
+    </div>
+    <div class="legend">
+      @for (item of expenseItems(); track item.label; let i = $index) {
+        <div
+          class="legend-item"
+          [class.legend-active]="selectedExpenseIndex() === i"
+          [class.legend-dimmed]="selectedExpenseIndex() !== null && selectedExpenseIndex() !== i"
+          (click)="onExpenseClick(i)"
+          (mouseenter)="hoveredExpenseIndex.set(i)"
+          (mouseleave)="hoveredExpenseIndex.set(null)">
+          <span class="legend-dot" [style.background]="item.color"></span>
+          <span class="legend-text">{{ item.label }}</span>
+          <span class="legend-val">{{ item.value }}</span>
+          <span class="legend-pct">{{ item.pct }}</span>
+        </div>
+      }
+    </div>
+  </div>
+</div>

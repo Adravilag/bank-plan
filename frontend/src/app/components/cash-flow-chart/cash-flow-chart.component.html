@@ -1,0 +1,14 @@
+<section class="card">
+  <div class="card-header">
+    <div>
+      <h3 class="card-title">Cash Flow Trend</h3>
+      <p class="card-subtitle">Zoom, pan y selecciona rangos directamente en la gráfica</p>
+    </div>
+    <div class="toggle-group">
+      <button class="toggle-btn" [class.active]="activeToggle() === '12M'" (click)="toggleView('12M')">12M</button>
+      <button class="toggle-btn" [class.active]="activeToggle() === '6M'" (click)="toggleView('6M')">6M</button>
+      <button class="toggle-btn" [class.active]="activeToggle() === '3M'" (click)="toggleView('3M')">3M</button>
+    </div>
+  </div>
+  <div id="chart-cashflow" class="chart-area chart-tall"></div>
+</section>

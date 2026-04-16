@@ -1,0 +1,167 @@
+$primary: #002e5a;
+$primary-container: #004481;
+$blue-900: #1e3a5f;
+$slate-400: #94a3b8;
+$slate-500: #64748b;
+
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes countUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes accentGrow {
+  to { transform: scaleX(1); }
+}
+
+.metric-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 24px 28px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  opacity: 0;
+  transform: translateY(24px);
+  animation: fadeSlideUp 0.6s ease-out forwards;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  }
+}
+
+.metric-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.metric-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: $slate-500;
+  font-weight: 600;
+}
+
+.metric-badge {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 10px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.badge-positive {
+  background: rgba(0, 102, 68, 0.08);
+  color: #006644;
+}
+
+.badge-neutral {
+  background: rgba(0, 68, 129, 0.08);
+  color: $primary-container;
+}
+
+.badge-info {
+  background: rgba(0, 150, 136, 0.08);
+  color: #009688;
+}
+
+.metric-value {
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: -1.5px;
+  color: #1a1c1c;
+  margin: 0 0 4px;
+  animation: countUp 0.5s ease-out 0.6s both;
+}
+
+.metric-sub {
+  font-size: 11px;
+  color: $slate-400;
+  margin: 0;
+  letter-spacing: 0.3px;
+}
+
+.metric-trend {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 2px 0 0;
+}
+
+.trend-up {
+  font-size: 11px;
+  font-weight: 700;
+  color: #006644;
+}
+
+.trend-down {
+  font-size: 11px;
+  font-weight: 700;
+  color: #dc2626;
+}
+
+.sparkline {
+  width: 100%;
+  height: 36px;
+  margin-top: 8px;
+}
+
+.loan-gauge {
+  margin-top: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.gauge-track {
+  height: 4px;
+  background: #e2e8f0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.gauge-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #009688, #26a69a);
+  border-radius: 4px;
+  transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.gauge-label {
+  font-size: 10px;
+  color: $slate-400;
+  letter-spacing: 0.3px;
+}
+
+.metric-accent {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: accentGrow 0.8s ease-out 0.7s forwards;
+}
+
+.accent-blue {
+  background: linear-gradient(90deg, $primary, $primary-container);
+}
+
+.accent-orange {
+  background: linear-gradient(90deg, #723101, #b95202);
+}
+
+.accent-teal {
+  background: linear-gradient(90deg, #009688, #26a69a);
+}

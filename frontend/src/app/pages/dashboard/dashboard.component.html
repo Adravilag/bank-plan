@@ -1,0 +1,63 @@
+<div class="dashboard">
+  <!-- Hero Metrics -->
+  @if (summary(); as s) {
+    <section class="metrics-grid">
+      <app-metric-card
+        label="Operating Balance"
+        [value]="formatCurrency(s.total_balance)"
+        badgeText="Active"
+        badgeType="positive"
+        accentColor="blue"
+        sparklineId="spark-balance"
+        sparklineColor="#004481"
+        [sparklineData]="sparkBalanceData()"
+        [trendValue]="formatCurrency(balanceTrend() < 0 ? -balanceTrend() : balanceTrend())"
+        [trendDirection]="balanceTrend() > 0 ? 'up' : balanceTrend() < 0 ? 'down' : 'none'"
+        trendLabel="vs mes anterior"
+      />
+      <app-metric-card
+        label="Total Transactions"
+        [value]="(s.total_transactions | number) ?? ''"
+        badgeText="All Nodes"
+        badgeType="neutral"
+        accentColor="orange"
+        sparklineId="spark-transactions"
+        sparklineColor="#b95202"
+        [sparklineData]="sparkTransactionData()"
+        [subtitle]="'Across ' + s.total_accounts + ' accounts'"
+      />
+      <app-metric-card
+        label="Active Loans"
+        [value]="formatCurrency(s.total_loan_amount)"
+        [badgeText]="s.active_loans + ' Active'"
+        badgeType="info"
+        accentColor="teal"
+        [gaugeValue]="loanUtilization()"
+        [gaugeLabel]="(loanUtilization() | number:'1.0-0') + '% utilización'"
+      />
+    </section>
+  }
+
+  <!-- Cash Flow Trend -->
+  @if (cashFlowData(); as cfData) {
+    <app-cash-flow-chart [data]="cfData" />
+  }
+
+  <!-- Two-Column: Distribution + Forecast -->
+  <section class="two-col">
+    @if (expenseData(); as ed) {
+      <app-expense-distribution
+        [data]="ed"
+        [totalTransactions]="summary()?.total_transactions ?? 0"
+        (filterChanged)="onExpenseFilterChanged($event)"
+      />
+    }
+
+    @if (liquidityData(); as ld) {
+      <app-liquidity-forecast #liquidityChart [data]="ld" />
+    }
+  </section>
+
+  <!-- Contributing Accounts Ledger -->
+  <app-accounts-ledger [accounts]="accounts()" [topAccounts]="topAccounts()" />
+</div>

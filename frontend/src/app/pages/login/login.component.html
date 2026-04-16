@@ -1,0 +1,125 @@
+<div class="login-page">
+  <!-- Brand Panel -->
+  <div class="brand-panel">
+    <div class="brand-bg"></div>
+    <div class="brand-content">
+      <div class="brand-logo">THE VAULT</div>
+      <h1 class="brand-headline">
+        Securing your<br />financial future.
+      </h1>
+      <p class="brand-description">
+        Experience the next generation of institutional banking. Sophisticated tools,
+        editorial clarity, and uncompromising security protocols.
+      </p>
+      <div class="brand-stats">
+        <div class="stat">
+          <span class="stat-value">256-bit</span>
+          <span class="stat-label">Encryption</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value">24/7</span>
+          <span class="stat-label">Monitoring</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Login Form -->
+  <div class="login-panel">
+    <div class="login-form-wrapper">
+      <!-- Mobile Logo -->
+      <div class="mobile-logo">The Vault</div>
+
+      <div class="login-header">
+        <h2>Welcome Back</h2>
+        <p>Enter your administrative credentials to access your secure workspace.</p>
+      </div>
+
+      <form (ngSubmit)="onSubmit()" class="login-form">
+        <!-- Username -->
+        <div class="field">
+          <label>Username</label>
+          <div class="input-wrapper">
+            <span class="input-icon">👤</span>
+            <input
+              type="text"
+              [(ngModel)]="username"
+              name="username"
+              placeholder="vault.admin.user"
+              autocomplete="username"
+            />
+          </div>
+        </div>
+
+        <!-- Password -->
+        <div class="field">
+          <div class="field-header">
+            <label>Security Key</label>
+            <a href="javascript:void(0)" class="forgot-link">Forgot Access?</a>
+          </div>
+          <div class="input-wrapper">
+            <span class="input-icon">🔒</span>
+            <input
+              [type]="showPassword() ? 'text' : 'password'"
+              [(ngModel)]="password"
+              name="password"
+              placeholder="••••••••••••"
+              autocomplete="current-password"
+            />
+            <button type="button" class="toggle-password" (click)="togglePassword()">
+              {{ showPassword() ? '🙈' : '👁' }}
+            </button>
+          </div>
+        </div>
+
+        <!-- MFA Toggle -->
+        <div class="mfa-row">
+          <span class="mfa-icon">🛡️</span>
+          <div class="mfa-text">
+            <span class="mfa-title">Multi-Factor Authentication</span>
+            <span class="mfa-sub">Required for this session</span>
+          </div>
+          <div class="mfa-toggle">
+            <div class="toggle-track active">
+              <div class="toggle-thumb"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Error -->
+        @if (error()) {
+          <div class="error-message">{{ error() }}</div>
+        }
+
+        <!-- Submit -->
+        <button type="submit" class="submit-btn" [disabled]="loading()">
+          @if (loading()) {
+            <span>Authorizing...</span>
+          } @else {
+            <span>Authorize Access</span>
+            <span class="arrow">→</span>
+          }
+        </button>
+      </form>
+
+      <div class="register-section">
+        <p>New to The Vault ecosystem?</p>
+        <a href="javascript:void(0)">Apply for Institutional Access ↗</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="login-footer">
+    <div class="footer-badges">
+      <span>🔐 FIDC Insured</span>
+      <span>✅ ISO 27001</span>
+    </div>
+    <div class="footer-links">
+      <a href="javascript:void(0)">Privacy Policy</a>
+      <a href="javascript:void(0)">Terms of Service</a>
+      <a href="javascript:void(0)">Security Disclosure</a>
+    </div>
+    <div class="footer-copy">© 2026 The Digital Vault. All Rights Reserved.</div>
+  </footer>
+</div>
