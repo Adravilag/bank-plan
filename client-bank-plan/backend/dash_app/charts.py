@@ -96,7 +96,7 @@ def build_cash_flow(months_slice=None) -> go.Figure:
     fig.update_layout(
         barmode='group', bargap=0.4,
         hovermode='x unified', hoverlabel=HOVERLABEL,
-        margin=dict(t=40, b=40, l=70, r=70),
+        margin=dict(t=10, b=40, l=70, r=70),
         xaxis=dict(
             gridcolor='#f0f0f0', linecolor='#e2e2e2', type='category',
             showspikes=True, spikemode='across', spikethickness=1,

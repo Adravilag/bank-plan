@@ -19,6 +19,7 @@ export class CashFlowChartComponent implements OnInit {
   data = input.required<CashFlowData>();
 
   activeToggle = signal<string>('12M');
+  activeTool = signal<string>('zoom');
   private cashFlowData: { months: string[]; cashFlow: number[]; totals: number[] } | null = null;
 
   ngOnInit(): void {
@@ -132,12 +133,7 @@ export class CashFlowChartComponent implements OnInit {
         },
         {
           responsive: true,
-          displayModeBar: 'hover',
-          modeBarButtonsToRemove: [
-            'toImage', 'sendDataToCloud', 'lasso2d',
-            'autoScale2d', 'select2d',
-          ],
-          displaylogo: false,
+          displayModeBar: false,
         }
       );
 
@@ -201,6 +197,21 @@ export class CashFlowChartComponent implements OnInit {
     }, {
       transition: { duration: 800, easing: 'cubic-in-out' },
       frame: { duration: 800, redraw: true },
+    });
+  }
+
+  setTool(tool: string): void {
+    this.activeTool.set(tool);
+    Plotly.relayout('chart-cashflow', { dragmode: tool });
+  }
+
+  resetZoom(): void {
+    if (!this.cashFlowData) return;
+    const { cashFlow, totals } = this.cashFlowData;
+    Plotly.relayout('chart-cashflow', {
+      'xaxis.autorange': true,
+      'yaxis.range': [0, Math.max(...cashFlow) * 1.12],
+      'yaxis2.range': [Math.min(0, ...totals) * 1.3, Math.max(...totals) * 1.3],
     });
   }
 }

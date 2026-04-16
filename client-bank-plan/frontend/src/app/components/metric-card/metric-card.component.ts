@@ -1,4 +1,4 @@
-import { Component, input, AfterViewInit, ElementRef, viewChild } from '@angular/core';
+import { Component, input, effect, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './metric-card.component.html',
   styleUrl: './metric-card.component.scss',
 })
-export class MetricCardComponent implements AfterViewInit {
+export class MetricCardComponent {
   label = input.required<string>();
   value = input.required<string>();
   badgeText = input<string>('');
@@ -22,22 +22,21 @@ export class MetricCardComponent implements AfterViewInit {
   trendDirection = input<'up' | 'down' | 'none'>('none');
   trendLabel = input<string>('');
 
-  private sparklineEl = viewChild<ElementRef>('sparklineRef');
-
   gaugeValue = input<number | null>(null);
   gaugeLabel = input<string>('');
 
-  sparklinePath = '';
+  sparklinePath = signal('');
 
-  ngAfterViewInit(): void {
-    const data = this.sparklineData();
-    if (data.length) {
-      setTimeout(() => this.buildSparklinePath(data), 50);
-    }
+  constructor() {
+    effect(() => {
+      const data = this.sparklineData();
+      if (data.length) {
+        this.sparklinePath.set(this.buildSparklinePath(data));
+      }
+    });
   }
 
-  private buildSparklinePath(values: number[]): void {
-    if (!values.length) return;
+  private buildSparklinePath(values: number[]): string {
     const width = 200;
     const height = 40;
     const max = Math.max(...values);
@@ -51,6 +50,6 @@ export class MetricCardComponent implements AfterViewInit {
       return `${x},${y}`;
     });
 
-    this.sparklinePath = `M${points.join(' L')}`;
+    return `M${points.join(' L')}`;
   }
 }

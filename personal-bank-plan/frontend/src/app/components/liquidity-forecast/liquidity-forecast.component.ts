@@ -41,18 +41,18 @@ export class LiquidityForecastComponent implements OnInit {
             line: { width: 0 },
             opacity: 0.9,
           },
-          text: values.map(v => '$' + v.toLocaleString('en-US', { maximumFractionDigits: 0 })),
+          text: values.map(v => '€' + v.toLocaleString('en-US', { maximumFractionDigits: 0 })),
           textposition: 'outside',
           textfont: { size: 10, color: '#64748b', family: 'Inter' },
           customdata: counts.map((c, i) => [
             c,
             ((values[i] / total) * 100).toFixed(1),
-            '$' + avgs[i].toLocaleString('en-US', { maximumFractionDigits: 0 }),
-            '$' + maxes[i].toLocaleString('en-US', { maximumFractionDigits: 0 }),
+            '€' + avgs[i].toLocaleString('en-US', { maximumFractionDigits: 0 }),
+            '€' + maxes[i].toLocaleString('en-US', { maximumFractionDigits: 0 }),
           ]),
           hovertemplate:
             '<b>%{x}</b><br>' +
-            'Balance: <b>$%{y:,.0f}</b><br>' +
+            'Balance: <b>€%{y:,.0f}</b><br>' +
             'Cuentas: %{customdata[0]}<br>' +
             'Promedio: %{customdata[2]}<br>' +
             'Mayor: %{customdata[3]}<br>' +
@@ -116,7 +116,7 @@ export class LiquidityForecastComponent implements OnInit {
             annotations: [{
               x: pt.x,
               y: pt.y,
-              text: `<b>$${pt.y.toLocaleString()}</b>`,
+              text: `<b>€${pt.y.toLocaleString()}</b>`,
               showarrow: true,
               arrowhead: 2,
               arrowcolor: '#004481',

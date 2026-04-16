@@ -1,0 +1,41 @@
+/* Reset browser defaults & add hover/active states for toolbar & toggle buttons */
+
+#tb-zoom, #tb-pan, #tb-reset,
+#toggle-12m, #toggle-6m, #toggle-3m {
+    outline: none !important;
+    border: none !important;
+    -webkit-tap-highlight-color: transparent;
+    transition: all 0.2s ease;
+}
+
+#tb-zoom:focus, #tb-pan:focus, #tb-reset:focus,
+#toggle-12m:focus, #toggle-6m:focus, #toggle-3m:focus,
+#tb-zoom:focus-visible, #tb-pan:focus-visible, #tb-reset:focus-visible,
+#toggle-12m:focus-visible, #toggle-6m:focus-visible, #toggle-3m:focus-visible {
+    outline: none !important;
+}
+
+/* Hover — subtle highlight */
+#tb-zoom:hover, #tb-pan:hover, #tb-reset:hover {
+    color: #002e5a !important;
+    background: rgba(0, 68, 129, 0.06) !important;
+}
+
+#toggle-12m:hover, #toggle-6m:hover, #toggle-3m:hover {
+    color: #002e5a !important;
+    background: rgba(0, 68, 129, 0.06) !important;
+}
+
+/* Active press handled in JS (Dash overrides inline styles on click) */
+#tb-zoom:active, #tb-pan:active, #tb-reset:active,
+#toggle-12m:active, #toggle-6m:active, #toggle-3m:active {
+    outline: none !important;
+}
+
+/* Ensure Material icons inside toolbar buttons stay small */
+#tb-zoom .material-symbols-outlined,
+#tb-pan .material-symbols-outlined,
+#tb-reset .material-symbols-outlined {
+    font-size: 14px !important;
+    line-height: 1;
+}

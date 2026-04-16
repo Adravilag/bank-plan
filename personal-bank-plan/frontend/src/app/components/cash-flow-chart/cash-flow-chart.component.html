@@ -5,6 +5,10 @@
       <p class="card-subtitle">Zoom, pan y selecciona rangos directamente en la gráfica</p>
     </div>
     <div class="toggle-group">
+      <button class="toolbar-btn" [class.active]="activeTool() === 'zoom'" (click)="setTool('zoom')" title="Zoom"><span class="material-symbols-outlined">search</span></button>
+      <button class="toolbar-btn" [class.active]="activeTool() === 'pan'" (click)="setTool('pan')" title="Pan"><span class="material-symbols-outlined">pan_tool</span></button>
+      <button class="toolbar-btn" (click)="resetZoom()" title="Reset"><span class="material-symbols-outlined">restart_alt</span></button>
+      <span class="toggle-divider"></span>
       <button class="toggle-btn" [class.active]="activeToggle() === '12M'" (click)="toggleView('12M')">12M</button>
       <button class="toggle-btn" [class.active]="activeToggle() === '6M'" (click)="toggleView('6M')">6M</button>
       <button class="toggle-btn" [class.active]="activeToggle() === '3M'" (click)="toggleView('3M')">3M</button>

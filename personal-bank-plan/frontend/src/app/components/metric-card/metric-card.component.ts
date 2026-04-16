@@ -1,4 +1,4 @@
-import { Component, input, AfterViewInit, ElementRef, viewChild } from '@angular/core';
+import { Component, input, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import Plotly from 'plotly.js-dist-min';
 
@@ -9,7 +9,7 @@ import Plotly from 'plotly.js-dist-min';
   templateUrl: './metric-card.component.html',
   styleUrl: './metric-card.component.scss',
 })
-export class MetricCardComponent implements AfterViewInit {
+export class MetricCardComponent {
   label = input.required<string>();
   value = input.required<string>();
   badgeText = input<string>('');
@@ -23,17 +23,18 @@ export class MetricCardComponent implements AfterViewInit {
   trendDirection = input<'up' | 'down' | 'none'>('none');
   trendLabel = input<string>('');
 
-  private sparklineEl = viewChild<ElementRef>('sparklineRef');
-
   gaugeValue = input<number | null>(null);
   gaugeLabel = input<string>('');
 
-  ngAfterViewInit(): void {
-    const data = this.sparklineData();
-    const id = this.sparklineId();
-    if (data.length && id) {
-      setTimeout(() => this.renderSparkline(id, data, this.sparklineColor()), 200);
-    }
+  constructor() {
+    effect(() => {
+      const data = this.sparklineData();
+      const id = this.sparklineId();
+      const color = this.sparklineColor();
+      if (data.length && id) {
+        setTimeout(() => this.renderSparkline(id, data, color), 50);
+      }
+    });
   }
 
   private renderSparkline(elementId: string, values: number[], color: string): void {
