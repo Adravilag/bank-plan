@@ -1,0 +1,50 @@
+<section class="card card-flush">
+  <div class="ledger-header">
+    <h3 class="card-title">Contributing Accounts Ledger</h3>
+    <p class="card-subtitle">Detailed breakdown of high-impact treasury nodes</p>
+  </div>
+  <div class="table-scroll">
+    <table class="vault-table">
+      <thead>
+        <tr>
+          <th>Account Entity</th>
+          <th>Node ID</th>
+          <th class="text-right">Balance</th>
+          <th class="text-right">Txns</th>
+          <th>Type</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (acc of accounts(); track acc.id) {
+          <tr>
+            <td>
+              <div class="entity-cell">
+                <div class="entity-icon">
+                  <span class="material-symbols-outlined">account_balance</span>
+                </div>
+                <span class="entity-name">{{ acc.holder_name }}</span>
+              </div>
+            </td>
+            <td class="mono">{{ acc.account_number }}</td>
+            <td class="text-right">
+              <div class="balance-cell">
+                <span class="bold">{{ formatCurrency(acc.balance) }}</span>
+                <div class="balance-bar-track">
+                  <div class="balance-bar-fill" [style.width.%]="getBalanceBarWidth(acc.balance)"></div>
+                </div>
+              </div>
+            </td>
+            <td class="text-right mono">{{ getTopAccountTxns(acc.id) }}</td>
+            <td>
+              <span class="type-badge">{{ getAccountTypeLabel(acc.account_type) }}</span>
+            </td>
+            <td>
+              <span class="status-pill {{ getStatusClass(acc) }}">{{ getStatusLabel(acc) }}</span>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</section>

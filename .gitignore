@@ -1,3 +1,49 @@
-/node_modules
-/package-lock.json
-/venv
+# ── Python ──────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.egg-info/
+dist/
+build/
+*.egg
+
+# ── Virtual environment ────────────────────────────────────────────────────
+venv/
+.venv/
+env/
+
+# ── SQLite ──────────────────────────────────────────────────────────────────
+*.sqlite3
+
+# ── Node / Angular ─────────────────────────────────────────────────────────
+node_modules/
+package-lock.json
+.angular/cache/
+dist/
+tmp/
+out-tsc/
+
+# ── IDEs and editors ───────────────────────────────────────────────────────
+.idea/
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/mcp.json
+.history/
+*.sublime-workspace
+*.swp
+*.swo
+*~
+
+# ── OS files ────────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# ── Misc ────────────────────────────────────────────────────────────────────
+.env
+*.log
+coverage/
+.sass-cache/

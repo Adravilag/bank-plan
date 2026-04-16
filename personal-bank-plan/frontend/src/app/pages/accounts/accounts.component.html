@@ -1,0 +1,52 @@
+<div class="page">
+  <div class="page-header">
+    <div>
+      <h1 class="page-title">Account Registry</h1>
+      <p class="page-subtitle">Comprehensive view of all treasury account nodes</p>
+    </div>
+    <div class="summary-badges">
+      <span class="summary-badge">{{ accounts().length }} Total</span>
+      <span class="summary-badge badge-active">{{ activeCount() }} Active</span>
+    </div>
+  </div>
+
+  <div class="card card-flush">
+    <div class="table-scroll">
+      <table class="vault-table">
+        <thead>
+          <tr>
+            <th>Account Entity</th>
+            <th>Node ID</th>
+            <th>Type</th>
+            <th class="text-right">Balance (EUR)</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (acc of accounts(); track acc.id) {
+            <tr>
+              <td>
+                <div class="entity-cell">
+                  <div class="entity-icon">
+                    <span class="material-symbols-outlined">account_balance_wallet</span>
+                  </div>
+                  <span class="entity-name">{{ acc.holder_name }}</span>
+                </div>
+              </td>
+              <td class="mono">{{ acc.account_number }}</td>
+              <td>
+                <span class="type-badge">{{ translateType(acc.account_type) }}</span>
+              </td>
+              <td class="text-right bold">{{ formatCurrency(acc.balance) }}</td>
+              <td>
+                <span class="status-pill" [class.status-active]="acc.is_active" [class.status-inactive]="!acc.is_active">
+                  {{ acc.is_active ? 'Active' : 'Inactive' }}
+                </span>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

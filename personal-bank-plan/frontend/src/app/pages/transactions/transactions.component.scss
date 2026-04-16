@@ -1,0 +1,137 @@
+$primary: #002e5a;
+$primary-container: #004481;
+$blue-900: #1e3a5f;
+$slate-400: #94a3b8;
+$slate-500: #64748b;
+
+.page {
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.page-title {
+  font-size: 22px;
+  font-weight: 800;
+  color: $blue-900;
+  margin: 0;
+  letter-spacing: -0.5px;
+}
+
+.page-subtitle {
+  font-size: 12px;
+  color: $slate-400;
+  margin: 4px 0 0;
+}
+
+.summary-badge {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  background: #f1f5f9;
+  color: $slate-500;
+}
+
+.card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.card-flush {
+  padding: 0;
+}
+
+.table-scroll {
+  overflow-x: auto;
+}
+
+.vault-table {
+  width: 100%;
+  border-collapse: collapse;
+
+  th {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: $slate-400;
+    font-weight: 600;
+    padding: 16px 28px;
+    text-align: left;
+    border-bottom: 1px solid #e2e8f0;
+  }
+
+  td {
+    padding: 16px 28px;
+    font-size: 13px;
+    color: #1a1c1c;
+    border-bottom: 1px solid #f1f5f9;
+  }
+
+  tbody tr:hover {
+    background: #fafbfc;
+  }
+}
+
+.text-right {
+  text-align: right;
+}
+
+.bold {
+  font-weight: 700;
+}
+
+.mono {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 12px;
+  color: $slate-500;
+}
+
+.desc-cell {
+  color: $slate-500;
+  font-size: 12px;
+}
+
+.type-badge {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+
+.type-deposit {
+  background: rgba(0, 102, 68, 0.08);
+  color: #006644;
+}
+
+.type-withdrawal {
+  background: rgba(186, 26, 26, 0.08);
+  color: #ba1a1a;
+}
+
+.type-transfer {
+  background: rgba(0, 68, 129, 0.08);
+  color: $primary-container;
+}
+
+.type-payment {
+  background: rgba(114, 49, 1, 0.08);
+  color: #723101;
+}
+
+.type-fee {
+  background: rgba(148, 163, 184, 0.15);
+  color: $slate-500;
+}

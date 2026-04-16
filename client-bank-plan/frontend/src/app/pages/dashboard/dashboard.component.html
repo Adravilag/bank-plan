@@ -1,0 +1,70 @@
+<div class="dashboard">
+  <!-- Hero Metrics -->
+  @if (summary(); as s) {
+    <section class="metrics-grid">
+      <app-metric-card
+        label="Operating Balance"
+        [value]="formatCurrency(s.total_balance)"
+        badgeText="Active"
+        badgeType="positive"
+        accentColor="blue"
+        sparklineId="spark-balance"
+        sparklineColor="#004481"
+        [sparklineData]="sparkBalanceData()"
+        [trendValue]="formatCurrency(balanceTrend() < 0 ? -balanceTrend() : balanceTrend())"
+        [trendDirection]="balanceTrend() > 0 ? 'up' : balanceTrend() < 0 ? 'down' : 'none'"
+        trendLabel="vs mes anterior"
+      />
+      <app-metric-card
+        label="Total Transactions"
+        [value]="(s.total_transactions | number) ?? ''"
+        badgeText="All Nodes"
+        badgeType="neutral"
+        accentColor="orange"
+        sparklineId="spark-transactions"
+        sparklineColor="#b95202"
+        [sparklineData]="sparkTransactionData()"
+        [subtitle]="'Across ' + s.total_accounts + ' accounts'"
+      />
+      <app-metric-card
+        label="Active Loans"
+        [value]="formatCurrency(s.total_loan_amount)"
+        [badgeText]="s.active_loans + ' Active'"
+        badgeType="info"
+        accentColor="teal"
+        [gaugeValue]="loanUtilization()"
+        [gaugeLabel]="(loanUtilization() | number:'1.0-0') + '% utilización'"
+      />
+    </section>
+  }
+
+  <!-- Cash Flow Trend (Dash micro-frontend) -->
+  <app-dash-iframe
+    chart="cash-flow"
+    title="Cash Flow Trend"
+    subtitle="Zoom, pan y selecciona rangos directamente en la gráfica"
+    height="340px"
+  />
+
+  <!-- Two-Column: Distribution + Forecast (Dash micro-frontends) -->
+  <section class="two-col">
+    <app-dash-iframe
+      #expenseChart
+      chart="expense-distribution"
+      title="Expense Distribution"
+      subtitle="Click en un segmento para filtrar"
+      height="300px"
+      (crossfilter)="onCrossfilter($event)"
+    />
+    <app-dash-iframe
+      #liquidityChart
+      chart="liquidity-forecast"
+      title="Liquidity Forecast"
+      subtitle="Balance por tipo de cuenta · hover para comparar"
+      height="300px"
+    />
+  </section>
+
+  <!-- Contributing Accounts Ledger -->
+  <app-accounts-ledger [accounts]="accounts()" [topAccounts]="topAccounts()" />
+</div>

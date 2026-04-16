@@ -1,0 +1,46 @@
+<div class="metric-card">
+  <div class="metric-header">
+    <span class="metric-label">{{ label() }}</span>
+    @if (badgeText()) {
+      <span class="metric-badge" [ngClass]="'badge-' + badgeType()">{{ badgeText() }}</span>
+    }
+  </div>
+  <h2 class="metric-value">{{ value() }}</h2>
+
+  @if (trendDirection() !== 'none') {
+    <div class="metric-trend">
+      @if (trendDirection() === 'up') {
+        <span class="trend-up">↑ +{{ trendValue() }}</span>
+      } @else {
+        <span class="trend-down">↓ {{ trendValue() }}</span>
+      }
+      @if (trendLabel()) {
+        <span class="metric-sub">{{ trendLabel() }}</span>
+      }
+    </div>
+  }
+
+  @if (subtitle()) {
+    <p class="metric-sub">{{ subtitle() }}</p>
+  }
+
+  @if (sparklinePath) {
+    <div class="sparkline">
+      <svg viewBox="0 0 200 40" preserveAspectRatio="none">
+        <path [attr.d]="sparklinePath + ' L200,40 L0,40 Z'" [attr.fill]="sparklineColor() + '15'" />
+        <path [attr.d]="sparklinePath" fill="none" [attr.stroke]="sparklineColor()" stroke-width="1.5" />
+      </svg>
+    </div>
+  }
+
+  @if (gaugeValue() !== null) {
+    <div class="loan-gauge">
+      <div class="gauge-track">
+        <div class="gauge-fill" [style.width.%]="gaugeValue()"></div>
+      </div>
+      <span class="gauge-label">{{ gaugeLabel() }}</span>
+    </div>
+  }
+
+  <div class="metric-accent" [ngClass]="'accent-' + accentColor()"></div>
+</div>

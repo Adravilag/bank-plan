@@ -1,0 +1,77 @@
+@if (auth.isAuthenticated()) {
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <h1 class="brand-title">Global Ledger</h1>
+      <p class="brand-sub">Institutional Access</p>
+    </div>
+    <nav class="sidebar-nav">
+      <a routerLink="/dashboard" routerLinkActive="active" class="nav-item">
+        <span class="material-symbols-outlined">dashboard</span>
+        <span class="nav-label">Dashboard</span>
+      </a>
+      <a routerLink="/accounts" routerLinkActive="active" class="nav-item">
+        <span class="material-symbols-outlined">account_balance_wallet</span>
+        <span class="nav-label">Cuentas</span>
+      </a>
+      <a routerLink="/transactions" routerLinkActive="active" class="nav-item">
+        <span class="material-symbols-outlined">receipt_long</span>
+        <span class="nav-label">Transacciones</span>
+      </a>
+    </nav>
+    <div class="sidebar-bottom">
+      <button class="generate-report-btn">Generate Report</button>
+      <button class="logout-btn" (click)="logout()">
+        <span class="material-symbols-outlined">logout</span>
+        <span class="nav-label">Sign Out</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <div class="main-wrapper">
+    <!-- Header -->
+    <header class="top-header">
+      <div class="header-left">
+        <span class="header-title">The Digital Vault</span>
+        <div class="search-wrapper">
+          <span class="material-symbols-outlined search-icon">search</span>
+          <input type="text" placeholder="Search institutional records..." class="search-input" />
+        </div>
+      </div>
+      <div class="header-right">
+        <button class="header-icon-btn">
+          <span class="material-symbols-outlined">notifications</span>
+        </button>
+        <button class="header-icon-btn">
+          <span class="material-symbols-outlined">settings</span>
+        </button>
+        <button class="header-icon-btn">
+          <span class="material-symbols-outlined">help</span>
+        </button>
+        <div class="user-profile" (click)="toggleUserMenu()">
+          <div class="user-info">
+            <span class="user-name">Admin</span>
+            <span class="user-role">Executive Secretary</span>
+          </div>
+          <div class="user-avatar">A</div>
+          @if (userMenuOpen()) {
+            <div class="user-menu">
+              <button class="user-menu-item" (click)="logout()">
+                <span class="material-symbols-outlined">logout</span>
+                Cerrar sesión
+              </button>
+            </div>
+          }
+        </div>
+      </div>
+    </header>
+
+    <!-- Content -->
+    <main class="content">
+      <router-outlet />
+    </main>
+  </div>
+} @else {
+  <router-outlet />
+}
